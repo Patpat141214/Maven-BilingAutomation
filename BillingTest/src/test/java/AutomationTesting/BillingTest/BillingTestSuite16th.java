@@ -532,7 +532,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		WebElement curBalance = driver.findElement(By.xpath("//input[@class='k-formatted-value k-input']"));
-		String balanceText = curBalance.getAttribute("title");
+		String balanceText = curBalance.getDomAttribute("title");
 		String balanceFormattedText = balanceText.replace("₱", "Php ").trim();
 		System.out.println(balanceFormattedText + " " + this.formattedTotalAmount);
 		if (balanceFormattedText.contentEquals(this.formattedTotalAmount)) {

@@ -21,8 +21,6 @@
           <include name="SOA01" invocation-numbers="0"/>
           <include name="SOA9"/>
           <include name="SOA02" invocation-numbers="0"/>
-          <include name="LI01" invocation-numbers="0"/>
-          <include name="LI02"/>
           <include name="setUp"/>
           <include name="BS04"/>
           <include name="BS01" invocation-numbers="0"/>

@@ -630,7 +630,7 @@ public class BillingTestSuite30th31st extends SettingClass {
 
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		WebElement curBalance = driver.findElement(By.xpath("//input[@class='k-formatted-value k-input']"));
-		String balanceText = curBalance.getAttribute("title");
+		String balanceText = curBalance.getDomAttribute("title");
 		String balanceFormattedText = balanceText.replace("₱", "Php ").trim();
 		System.out.println(balanceFormattedText + " " + this.formattedTotalAmount);
 		if (balanceFormattedText.contentEquals(this.formattedTotalAmount)) {
@@ -983,6 +983,7 @@ public class BillingTestSuite30th31st extends SettingClass {
 			Reporter.log("Test ID (BS05) Passed ", true);
 			Reporter.log("Signatory: " + actualSignatory, true);
 			Assert.assertTrue(true, "Account Signatory is Valid!");
+			Reporter.log("End of Billing Statement Validation", true);
 
 		} else {
 			Reporter.log("Test ID (BS06) Failed ", true);
