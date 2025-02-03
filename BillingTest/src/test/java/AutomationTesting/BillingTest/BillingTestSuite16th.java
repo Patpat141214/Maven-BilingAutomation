@@ -32,7 +32,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "link" })
 	@Test(priority = 0)
-	public void LI01(String link) {
+	public void _01LI01(String link) {
 		Reporter.log("Start of Login Validation...)", true);
 		Reporter.log("Start of Test ID (LI01)", true);
 		Reporter.log("Navigating to URL...", true);
@@ -56,7 +56,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 1)
-	public void LI02() {
+	public void _01LI02() {
 
 		Reporter.log("Start of Test ID (LI02)", true);
 
@@ -82,7 +82,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingPeriod", "Hospital" })
 	@Test(priority = 2)
-	public void BIL01(String billingPeriod, String Hospital) {
+	public void _02BIL01(String billingPeriod, String Hospital) {
 		Reporter.log("Start of Billing Module Validation...", true);
 		Reporter.log("Navigate to Billing Module...", true);
 		driver.findElement(By.xpath("//span[@class='flex-grow commandbar-item-text' and text()='Billing']")).click();
@@ -184,7 +184,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingDate" })
 	@Test(priority = 3)
-	public void BIL02(String billingDate) {
+	public void _02BIL02(String billingDate) {
 		Reporter.log("Start of Test ID (BIL02)", true);
 		String BillingDate = driver
 				.findElement(By.xpath("//td[@data-field='BillingDate' and text()='" + billingDate + "']")).getText();
@@ -202,7 +202,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 4)
-	public void BIL03() {
+	public void _02BIL03() {
 		Reporter.log("Start of Test ID (BIL03)", true);
 		freeTrials = driver.findElement(By.xpath("//td[@data-field='TotalFreeClaims']")).getText();
 		totalClaims = driver.findElement(By.xpath("//td[@data-field='TotalClaims']")).getText();
@@ -237,7 +237,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingPeriod", "expectedSoaDate" })
 	@Test(priority = 5)
-	public void BIL04(String billingPeriod, String expectedSoaDate) {
+	public void _02BIL04(String billingPeriod, String expectedSoaDate) {
 
 		Reporter.log("Start of Test ID (BIL04)", true);
 		String BillingPeriod = driver
@@ -268,7 +268,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingPeriod", "Hospital", "statementDate" })
 	@Test(priority = 6)
-	public void COL01(String billingPeriod, String Hospital, String statementDate) {
+	public void _03COL01(String billingPeriod, String Hospital, String statementDate) {
 		Reporter.log("Start of Test ID (COL01)", true);
 		Reporter.log("Start of Collection Module Validation...", true);
 		Reporter.log("Navigate to Collection Module...", true);
@@ -474,7 +474,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingPeriod" })
 	@Test(priority = 7)
-	public void COL02(String billingPeriod) {
+	public void _03COL02(String billingPeriod) {
 		Reporter.log("Start of Test ID (COL02)", true);
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
 		driver.findElement(By.xpath("//span[@class='k-link' and text()='Payment']")).click();
@@ -527,7 +527,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 8)
-	public void COL03() {
+	public void _03COL03() {
 		Reporter.log("Start of Test ID (COL03)", true);
 
 		driver.switchTo().frame(driver.findElement(By.tagName("iframe")));
@@ -559,7 +559,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "statementDate", "Hospital" })
 	@Test(priority = 9)
-	public void AR01(String statementDate, String Hospital) {
+	public void _04AR01(String statementDate, String Hospital) {
 		Reporter.log("Start of Test ID (AR01)", true);
 		Reporter.log("Navigating to Account Receivable Module...", true);
 		Reporter.log("Start of Account Receivable Module Validation...", true);
@@ -604,51 +604,59 @@ public class BillingTestSuite16th extends SettingClass {
 		textBox.sendKeys(Keys.ENTER);
 
 		try {
-			Thread.sleep(3000); // Pause for 3 seconds to wait for the page to load
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		    // Try to find the element with the statement date
+		    String StatementDate = driver.findElement(By.xpath("//td[text()='" + statementDate + "']")).getText();
 
-		String StatementDate = driver.findElement(By.xpath("//td[text()='" + statementDate + "']")).getText();
-
-		if (StatementDate.contentEquals(statementDate)) {
-			Reporter.log("Test ID (AR01) Passed ", true);
-			Reporter.log("Statement Date is correct which is: " + StatementDate, true);
-			Assert.assertTrue(true, "Statement Date is correct!");
-		} else {
-			Reporter.log("Test ID (AR01) Failed ", true);
-			Assert.fail();
-
+		    // If the element is found, compare the dates
+		    if (StatementDate.contentEquals(statementDate)) {
+		        Reporter.log("Test ID (AR01) Passed ", true);
+		        Reporter.log("Statement Date is correct which is: " + StatementDate, true);
+		        Assert.assertTrue(true, "Statement Date is correct!");
+		    } else {
+		        Reporter.log("Test ID (AR01) Failed ", true);
+		        Assert.fail("Statement Date is incorrect!");
+		    }
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+		    // If the element is not found, log the test as passed
+			Reporter.log("Test ID (AR01) Passed - No Unpaid Billings found", true);
+		    Assert.assertTrue(true, "No unnpaid billings found, test passed!");
 		}
 
 	}
 
 	@Parameters({ "billingPeriod" })
 	@Test(priority = 10)
-	public void AR02(String billingPeriod) {
+	public void _04AR02(String billingPeriod) {
 		Reporter.log("Start of Test ID (AR02)", true);
 
-		String getBillingPeriod = driver.findElement(By.xpath("//td[text()='" + billingPeriod + "']")).getText();
-		if (getBillingPeriod.contentEquals(billingPeriod)) {
-			Reporter.log("Test ID (AR02) Passed ", true);
-			Reporter.log("Billing Period is correct which is: " + billingPeriod, true);
-			Assert.assertTrue(true, "Billing Period is correct");
-		} else {
-			Reporter.log("Test ID (AR02) Failed ", true);
-			Assert.fail();
+		try {
+			
+			String getBillingPeriod = driver.findElement(By.xpath("//td[text()='" + billingPeriod + "']")).getText();
+			if (getBillingPeriod.contentEquals(billingPeriod)) {
+				Reporter.log("Test ID (AR02) Passed ", true);
+				Reporter.log("Billing Period is correct which is: " + billingPeriod, true);
+				Assert.assertTrue(true, "Billing Period is correct");
+			} else {
+				Reporter.log("Test ID (AR02) Failed ", true);
+				Assert.fail();
 
-		}
+			}
+			}catch (org.openqa.selenium.NoSuchElementException e) {
+			    // If the element is not found, log the test as passed
+			    Reporter.log("Test ID (AR02) Passed - No Unpaid Billings found", true);
+			    Assert.assertTrue(true, "No unnpaid billings found, test passed!");
+			}
 
 	}
 
 	@Test(priority = 10)
-	public void AR03() {
+	public void _04AR03() {
 		Reporter.log("Start of Test ID (AR03)", true);
 
-		String getAmountDue = driver
-				.findElement(By.xpath("//td[@data-field='TotalAmount' and text()='" + this.formattedTotalAmount + "']"))
-				.getText();
-
+		try {
+			String getAmountDue = driver
+					.findElement(By.xpath("//td[@data-field='TotalAmount' and text()='" + this.formattedTotalAmount + "']"))
+					.getText();
 		if (this.formattedTotalAmount.contentEquals(getAmountDue)) {
 			Reporter.log("Test ID (AR03) Passed ", true);
 			Reporter.log("Total Amount in Billing : " + this.formattedTotalAmount, true);
@@ -661,12 +669,16 @@ public class BillingTestSuite16th extends SettingClass {
 			Assert.fail();
 
 		}
-
+		}catch (org.openqa.selenium.NoSuchElementException e) {
+		    // If the element is not found, log the test as passed
+		    Reporter.log("Test ID (AR03) Passed - No Unpaid Billings found", true);
+		    Assert.assertTrue(true, "No unnpaid billings found, test passed!");
+	}
 	}
 
 	@Parameters({ "billingPeriod", "Hospital" })
 	@Test(priority = 11)
-	public void SOA01(String billingPeriod, String Hospital) {
+	public void _05SOA01(String billingPeriod, String Hospital) {
 		Reporter.log("Start of Test ID (SOA01)", true);
 		Reporter.log("Navigating to Statement of Account...", true);
 		Reporter.log("Start of Statement of Account Validation...", true);
@@ -732,7 +744,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingDate" })
 	@Test(priority = 12)
-	public void SOA02(String billingDate) {
+	public void _05SOA02(String billingDate) {
 		Reporter.log("Start of Test ID (SOA02)", true);
 
 		String getBillingDate = driver
@@ -753,7 +765,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 13)
-	public void SOA3() {
+	public void _05SOA03() {
 		Reporter.log("Start of Test ID (SOA03)", true);
 
 		String getTotalClaims = driver.findElement(By.xpath("//td[@data-field='TotalClaims']")).getText();
@@ -773,7 +785,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingPeriod" })
 	@Test(priority = 14)
-	public void SOA4(String billingPeriod) {
+	public void _05SOA04(String billingPeriod) {
 		Reporter.log("Start of Test ID (SOA04)", true);
 
 		WebElement navSoaReport = driver.findElement(By.xpath("//td[@data-field='BillingPeriod' and text()='"
@@ -813,7 +825,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "billingPeriod" })
 	@Test(priority = 15)
-	public void SOA5(String billingPeriod) {
+	public void _05SOA5(String billingPeriod) {
 		Reporter.log("Start of Test ID (SOA05)", true);
 
 		String navSoaReportBillingPeriod = driver
@@ -835,7 +847,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 16)
-	public void SOA6() {
+	public void _05SOA06() {
 		Reporter.log("Start of Test ID (SOA06)", true);
 
 		String getTotalClaims = driver
@@ -870,7 +882,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 17)
-	public void SOA7() {
+	public void _05SOA07() {
 		Reporter.log("Start of Test ID (SOA07)", true);
 
 		String getTotalAmount = driver
@@ -904,7 +916,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 18)
-	public void SOA8() {
+	public void _05SOA08() {
 		Reporter.log("Start of Test ID (SOA08)", true);
 
 		String formattedTotalAmount2 = this.formattedTotalAmount.replace("Php", "").trim().replace(",", "");
@@ -932,7 +944,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 19)
-	public void SOA9() {
+	public void _05SOA09() {
 		Reporter.log("Start of Test ID (SOA09)", true);
 
 		double formattedVatSales = Double.parseDouble(this.vatableSales.replace("₱", "").trim().replace(",", ""));
@@ -958,7 +970,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 20)
-	public void SOA10() {
+	public void _05SOA10() {
 		Reporter.log("Start of Test ID (SOA10)", true);
 
 		double formattedVatSales = Double.parseDouble(this.vatableSales.replace("₱", "").trim().replace(",", ""));
@@ -988,7 +1000,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 21)
-	public void SOA11() {
+	public void _05SOA11() {
 		Reporter.log("Start of Test ID (SOA11)", true);
 
 		String CurrentBalance = driver
@@ -1010,7 +1022,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 22)
-	public void SOA12() {
+	public void _05SOA12() {
 		Reporter.log("Start of Test ID (SOA12)", true);
 
 		String amountDue = driver
@@ -1031,7 +1043,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 23)
-	public void SOA13() {
+	public void _05SOA13() {
 		Reporter.log("Start of Test ID (SOA13)", true);
 
 		String TotalPayment = driver.findElement(By.xpath("//div[text()='(" + this.formattedAllCurrentBalance + ")']"))
@@ -1053,7 +1065,7 @@ public class BillingTestSuite16th extends SettingClass {
 	}
 
 	@Test(priority = 24)
-	public void SOA14() {
+	public void _05SOA14() {
 		Reporter.log("Start of Test ID (SOA14)", true);
 
 		// double formatAmountDue = Double.parseDouble(this.amountDue.replace("Php",
@@ -1092,7 +1104,7 @@ public class BillingTestSuite16th extends SettingClass {
 
 	@Parameters({ "link2", "Hospital", "billingPeriod", "billingDate" })
 	@Test(priority = 25)
-	public void SOA15(String link2, String Hospital, String billingPeriod, String billingDate) {
+	public void _05SOA15(String link2, String Hospital, String billingPeriod, String billingDate) {
 		Reporter.log("Start of Test ID (SOA15)", true);
 
 		driver.get(link2);

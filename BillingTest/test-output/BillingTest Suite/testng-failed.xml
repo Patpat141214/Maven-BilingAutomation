@@ -15,40 +15,42 @@
     <classes>
       <class name="AutomationTesting.BillingTest.BillingTestSuite30th31st">
         <methods>
-          <include name="SOA7"/>
-          <include name="SOA5" invocation-numbers="0"/>
-          <include name="SOA8"/>
-          <include name="SOA01" invocation-numbers="0"/>
-          <include name="SOA9"/>
-          <include name="SOA02" invocation-numbers="0"/>
+          <include name="_07SOA02" invocation-numbers="0"/>
+          <include name="_04COL01" invocation-numbers="0"/>
+          <include name="_07SOA10"/>
+          <include name="_04COL02" invocation-numbers="0"/>
+          <include name="_07SOA11"/>
+          <include name="_03BIL02" invocation-numbers="0"/>
+          <include name="_06BS01" invocation-numbers="0"/>
+          <include name="_06BS03" invocation-numbers="0"/>
           <include name="setUp"/>
-          <include name="BS04"/>
-          <include name="BS01" invocation-numbers="0"/>
-          <include name="BS02"/>
-          <include name="SOA3"/>
-          <include name="BS05"/>
-          <include name="BS06"/>
-          <include name="BS03" invocation-numbers="0"/>
-          <include name="SOA4" invocation-numbers="0"/>
-          <include name="COL03"/>
-          <include name="CL01" invocation-numbers="0"/>
-          <include name="SOA11"/>
-          <include name="COL02" invocation-numbers="0"/>
-          <include name="SOA12"/>
-          <include name="SOA15" invocation-numbers="0"/>
-          <include name="SOA10"/>
+          <include name="_03BIL03"/>
+          <include name="_03BIL01" invocation-numbers="0"/>
+          <include name="_03BIL04" invocation-numbers="0"/>
+          <include name="_07SOA09"/>
+          <include name="_06BS06"/>
+          <include name="_07SOA07"/>
+          <include name="_07SOA08"/>
+          <include name="_07SOA05" invocation-numbers="0"/>
+          <include name="_06BS02"/>
+          <include name="_07SOA06"/>
+          <include name="_06BS05"/>
+          <include name="_07SOA03"/>
+          <include name="_06BS04"/>
+          <include name="_07SOA04" invocation-numbers="0"/>
+          <include name="_07SOA01" invocation-numbers="0"/>
+          <include name="_05AR01" invocation-numbers="0"/>
+          <include name="_07SOA13"/>
+          <include name="_05AR02" invocation-numbers="0"/>
+          <include name="_01LI01" invocation-numbers="0"/>
+          <include name="_02CL01" invocation-numbers="0"/>
           <include name="tearDown"/>
-          <include name="SOA13"/>
-          <include name="SOA14"/>
-          <include name="BIL02" invocation-numbers="0"/>
-          <include name="BIL01" invocation-numbers="0"/>
-          <include name="BIL04" invocation-numbers="0"/>
-          <include name="AR01" invocation-numbers="0"/>
-          <include name="BIL03"/>
-          <include name="AR02" invocation-numbers="0"/>
-          <include name="SOA6"/>
-          <include name="AR03"/>
-          <include name="COL01" invocation-numbers="0"/>
+          <include name="_01LI02"/>
+          <include name="_05AR03"/>
+          <include name="_07SOA14"/>
+          <include name="_07SOA15" invocation-numbers="0"/>
+          <include name="_04COL03"/>
+          <include name="_07SOA12"/>
         </methods>
       </class> <!-- AutomationTesting.BillingTest.BillingTestSuite30th31st -->
     </classes>
